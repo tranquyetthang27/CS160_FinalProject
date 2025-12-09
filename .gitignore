@@ -1,0 +1,17 @@
+# Bỏ qua file chạy thực thi
+*.exe
+*.dll
+*.o
+*.obj
+
+# Bỏ qua thư mục build (nếu có)
+build/
+bin/
+Debug/
+Release/
+x64/
+
+# Bỏ qua các file cấu hình riêng của IDE (VS Code, Visual Studio)
+.vscode/
+.vs/
+*.user
