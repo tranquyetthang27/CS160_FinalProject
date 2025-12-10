@@ -78,6 +78,14 @@ class DynamicArray
             }
             return m_data[index];
         }
+        const T& operator[] (int index)const
+        {
+            if (index < 0 || index >= m_size)
+            {
+                throw std::out_of_range();
+            }
+            return m_data[index];
+        }
 
         void clear()
         {

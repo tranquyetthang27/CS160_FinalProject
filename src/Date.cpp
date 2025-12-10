@@ -21,14 +21,15 @@ bool Date::isValidDate(){
     return true;
 }
 
-bool Date::operator < (const Date& other)const{
+
+bool Date::operator <= (const Date& other)const{
     if(other.y < y)return false;
     if(other.y == y && other.m < m)return false;
     if(other.y == y && other.m == m && other.d < d)return false;
     return true;
 }
 
-bool Date::operator > (const Date& other)const{
+bool Date::operator >= (const Date& other)const{
     if(other.y > y)return false;
     if(other.y == y && other.m > m)return false;
     if(other.y == y && other.m == m && other.d > d)return false;
@@ -37,6 +38,10 @@ bool Date::operator > (const Date& other)const{
 
 bool Date::operator == (const Date& other)const{
     return (other.y == y && other.m == m && other.d == d);
+}
+
+bool Date::isBetween(const Date&start, const Date& end){
+    return( *this >= start && *this <= end);
 }
 
 Date Date::get_date(){
