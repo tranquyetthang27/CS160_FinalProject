@@ -13,7 +13,7 @@ class Date{
         bool operator < (const Date& other)const;
         bool operator > (const Date& other)const;
         bool operator == (const Date& other)const;
-        void toString();
+        void toString()const;
 };
 
 #endif

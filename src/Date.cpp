@@ -48,7 +48,7 @@ Date Date::get_date(){
     return Date(d, m, y);
 }
 
-void Date::toString(){
+void Date::toString()const{
     if(d < 10)cout << 0;
     cout << d <<'/';
     if(m < 10)cout << 0;
