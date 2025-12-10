@@ -1,15 +1,23 @@
-# Bỏ qua file chạy thực thi
+# Bỏ qua file thực thi và object
 *.exe
 *.dll
 *.o
 *.obj
+*.i 
 
-# Bỏ qua thư mục build (nếu có)
+# Bỏ qua các thư mục build (CMake và IDE)
 build/
 bin/
 Debug/
 Release/
 x64/
+out/
+
+# CMake specific
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
 
 # Bỏ qua các file cấu hình riêng của IDE (VS Code, Visual Studio)
 .vscode/
