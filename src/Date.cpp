@@ -3,24 +3,60 @@
 #include "iostream"
 using namespace std;
 
+int dayinmonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+string inttoString(int x){
+    string res = "";
+    while(x){
+        res = char(x%10) + res;
+        x/=10;
+    }
+    return res;
+}
 
 Date::Date(int d, int m, int y): d(d), m(m), y(y){};
 
 bool Date::isValidDate(){
     if( d < 1 || m < 1 || y < 1 || m > 12)return false;
-    if(m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12 ){
-        if(d > 31)return false;
+    if(y % 100 != 0 && y % 4 == 0 && m == 2){
+        if(d > 29)return false;
     }
-    else{
-        if(m == 2){
-            if(y % 4 == 0)if(d > 29)return false;
-            else if(d > 28)return false;
-        }
-        else if(d > 30)return false;
-    }
+    else if(dayinmonth[m] < d)return false;
     return true;
 }
 
+void Date::addDays(int target){
+    d += target;
+    if(y % 100 != 0 && y % 4 == 0 && m == 2){
+        if(d > 29){
+            m = 3;
+            d -= 29;
+        }
+    }
+    else if(d > dayinmonth[m]){
+        if(m == 12){
+            m = 1;
+            d -= 31;
+            y ++;
+        }
+        d -= dayinmonth[m];
+        m ++;
+    }
+}
+
+void Date::addMonths(int target){
+    m += target;
+    if(m > 12){
+        y ++;
+        m -= 12;
+        d = min(d, dayinmonth[m]);
+    }
+}
+
+void Date::addYears(int target){
+    y++;
+    if(m == 2 && d == 29)d = 28;
+}
 
 bool Date::operator <= (const Date& other)const{
     if(other.y < y)return false;
@@ -53,9 +89,12 @@ Date Date::get_date(){
     return Date(d, m, y);
 }
 
-void Date::toString()const{
-    if(d < 10)cout << 0;
-    cout << d <<'/';
-    if(m < 10)cout << 0;
-    cout << m << '/' << y;
+string Date::toString()const{
+    string res = "";
+    if(d < 10)res = "0";
+    res = res + inttoString(d) + '/';
+    if(m < 10)res = res + '0';
+    res = res + inttoString(m) + '/';
+    res = res + inttoString(y);
+    return res;
 }

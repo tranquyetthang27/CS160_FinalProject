@@ -17,7 +17,7 @@ private:
 
 public:
     Wallet(const int &id, const string &name, const long long &init = 0);
-
+    Wallet() = default;
     //Get information
     int getID() const;
     string getName() const;

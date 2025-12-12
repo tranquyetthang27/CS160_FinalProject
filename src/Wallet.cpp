@@ -14,6 +14,7 @@ int Wallet::getID() const
 {
     return m_id;
 }
+
 string Wallet::getName() const
 {
     return m_name;
@@ -23,7 +24,7 @@ long long Wallet::getBalance() const
     return m_balance;
 }
 
-Wallet::setName(const string &newName)
+void Wallet::setName(const string &newName)
 {
     m_name = newName;
 }

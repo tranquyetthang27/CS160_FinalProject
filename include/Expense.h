@@ -3,6 +3,7 @@
 #include <string>
 #include "Date.h"
 #include "DynamicArray.h"
+#include "Wallet.h"
 using namespace std;
 
 class Expense{
@@ -18,8 +19,8 @@ public:
     long long getAmount()const;
     int getWalletId()const;
     int getCategoryId()const;
-    string getDescription()const;
-    void addExpense(/*Wallet& wallet,*/ DynamicArray<Expense>&list);
+    void getDescription()const;
+    void addExpense(Wallet& wallet, DynamicArray<Expense>&list);
 };
 
 
