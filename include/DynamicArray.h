@@ -1,3 +1,6 @@
+#ifndef DYNAMICARRAY_H
+#define DYNAMICARRAY_H
+
 #include<iostream>
 #include<stdexcept>
 
@@ -111,3 +114,6 @@ class DynamicArray
             return -1;
         }
 };
+
+#endif
+
