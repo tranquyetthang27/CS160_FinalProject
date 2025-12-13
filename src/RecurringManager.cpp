@@ -1,5 +1,4 @@
 #include "../include/RecurringManager.h"
-#include <iostream>
 #include <iomanip>
 using namespace std; 
 
@@ -47,11 +46,7 @@ void RecurringManager::addRecurringExpense(
     nextRecurringId++;
 }
 
-void RecurringManager::processDueExpenses(
-    const Date& currentDate, 
-    DynamicArray<Expense>& expenses,
-    DynamicArray<Wallet>& wallets
-) {
+void RecurringManager::processDueExpenses(const Date& currentDate, DynamicArray<Expense>& expenses, DynamicArray<Wallet>& wallets) {
     if (recurringList.isEmpty()) {
         return;
     }
@@ -120,4 +115,16 @@ void RecurringManager::displayRecurringList() const {
                   << " | " << setw(30) << left << item.getDescription() << " |" << "\n";
     }
     cout << "==================================================================================" << "\n";
+}
+
+void RecurringManager::setNextRecurringId(int id){
+    nextRecurringId = id;
+}
+
+int RecurringManager::getMaxId()const{
+    int res = -1;
+    for(int i = 0; i < recurringList.getSize(); i ++){
+        res = max(res, recurringList[i].getId());
+    }
+    return res;
 }

@@ -1,9 +1,5 @@
 #include "../include/Expense.h"
-#include <string>
-#include "../include/DynamicArray.h"
-#include "../include/Date.h"
 #include <iomanip> 
-#include "../include/Wallet.h"
 using namespace std;
 
 Expense:: Expense(const Date& date, const long long& amount, const int& wid, const int& cid, const string& decs)

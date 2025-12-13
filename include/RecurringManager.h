@@ -23,7 +23,11 @@ public:
 
     void displayRecurringList() const;
     
+    void setNextRecurringId(int id);
+
+    int getMaxId()const;
+
     DynamicArray<RecurringExpense>& getRecurringList() { return recurringList; }
 };
 
-#endif // RECURRING_MANAGER_H
+#endif

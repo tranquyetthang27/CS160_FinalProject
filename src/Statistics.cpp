@@ -1,12 +1,7 @@
 #include "..\include\Statistics.h"
-#include "..\include\DynamicArray.h"
-#include "..\include\Expense.h"
-#include "..\include\ExpenseCategory.h"
 // #include "..\include\Income.h"
 #include "..\include\Wallet.h"
-#include <iostream>
 #include <iomanip>
-#include <string>
 #include <algorithm>
 
 using namespace std;
