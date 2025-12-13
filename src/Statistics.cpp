@@ -1,5 +1,5 @@
 #include "..\include\Statistics.h"
-// #include "..\include\Income.h"
+#include "..\include\Income.h"
 #include "..\include\Wallet.h"
 #include <iomanip>
 #include <algorithm>
@@ -13,11 +13,11 @@ long long Statistics::calcNetBalance(const Date& start, const Date& end, /*const
             Total -= ex[i].getAmount();
         }
     }
-    // for(int i = 0; i < in.getSize(); i++){
-    //     if(in[i].getDate().isBetween(start, end)){
-    //         Total += in[i].getAmount();
-    //     }
-    // }
+    for(int i = 0; i < in.getSize(); i++){
+        if(in[i].getDate().isBetween(start, end)){
+            Total += in[i].getAmount();
+        }
+    }
     return Total;
 }
 
@@ -83,12 +83,12 @@ void Statistics::reportAnnualOverview(const int& year, /*const DynamicArray<Inco
             monthlyExpense[ex[i].getDate().get_month()] += ex[i].getAmount();
         }
     }
-    // for(int i = 0; i < in.getSize(); i++){
-    //     if(in[i].getDate().get_year() == year){
-    //         totalIncome += in[i].getAmount();
-    //         monthlyIncome[in[i].getDate().get_month()] += in[i].getAmount();
-    //     }
-    // }
+    for(int i = 0; i < in.getSize(); i++){
+        if(in[i].getDate().get_year() == year){
+            totalIncome += in[i].getAmount();
+            monthlyIncome[in[i].getDate().get_month()] += in[i].getAmount();
+        }
+    }
     cout << "\n==================================================================================" << "\n";
     cout << "                          BAO CAO TONG QUAN NAM " << year << "\n";
     cout << "==================================================================================" << "\n";

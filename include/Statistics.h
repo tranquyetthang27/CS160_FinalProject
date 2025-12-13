@@ -4,7 +4,7 @@
 #include "Expense.h"
 #include "DynamicArray.h"
 #include "ExpenseCategory.h"
-// #include "Income.h"
+#include "Income.h"
 using namespace std;
 
 class Statistics{

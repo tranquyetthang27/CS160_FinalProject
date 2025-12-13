@@ -169,7 +169,7 @@ void AppMenu::handleTransactionMenu() {
         if (!(cin >> choice)) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            choice = -1; // Đặt giá trị không hợp lệ
+            choice = -1;
         }
 
         switch (choice) {
