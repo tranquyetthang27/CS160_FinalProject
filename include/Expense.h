@@ -3,6 +3,7 @@
 #include <string>
 #include "Date.h"
 #include "DynamicArray.h"
+#include "Wallet.h"
 using namespace std;
 
 class Expense{
@@ -13,13 +14,17 @@ private:
     int categoryId;
     string description;
 public:
+    Expense();
     Expense(const Date& date,const long long& amount, const int& wid, const int& cid, const string& desc = "");
     Date getDate()const;
     long long getAmount()const;
     int getWalletId()const;
     int getCategoryId()const;
-    string getDescription()const;
-    void addExpense(/*Wallet& wallet,*/ DynamicArray<Expense>&list);
+    void getDescription()const;
+    void addExpense(Wallet& wallet, DynamicArray<Expense>&list);
+
+    void write2Binary(ofstream &out) const;
+    void readFromBinary(ifstream &inp);
 };
 
 
