@@ -15,7 +15,3 @@ string ExpenseCategory::getName()const{
 void ExpenseCategory::setName(const string& newname){
     name = newname;
 }
-
-void ExpenseCategory::display()const{
-    cout << '| ' << setw(5) << left << id << " | " << setw(20) << left << name << "\n"; 
-}

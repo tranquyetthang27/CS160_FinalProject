@@ -1,5 +1,6 @@
 #include "../include/RecurringManager.h"
 #include <iomanip>
+#include <algorithm>
 using namespace std; 
 
 Date RecurringManager::calculateNextDueDate(const Date& lastDate, RecurrencePeriod period) const {
@@ -72,28 +73,28 @@ void RecurringManager::processDueExpenses(const Date& currentDate, DynamicArray<
 
     if (transactionsCreated > 0) {
         cout << "=======================================================" << "\n";
-        cout << "HOAN THANH: Da tao " << transactionsCreated << " giao dich dinh ky thuc te." << "\n";
+        cout << "COMPLETED: Created " << transactionsCreated << " actual recurring transactions." << "\n";
         cout << "=======================================================" << "\n";
     } else {
-        cout << "Khong co giao dich dinh ky nao den han trong hom nay." << "\n";
+        cout << "No recurring transactions are due today." << "\n";
     }
 }
 
 void RecurringManager::displayRecurringList() const {
     if (recurringList.isEmpty()) {
-        cout << "Khong co quy tac chi tieu dinh ky nao duoc tao." << "\n";
+        cout << "No recurring expense rules have been created." << "\n";
         return;
     }
     
     cout << "\n==================================================================================" << "\n";
-    cout << "                          DANH SACH QUY TAC CHI TIEU DINH KY " << "\n";
+    cout << "                         LIST OF RECURRING EXPENSE RULES " << "\n";
     cout << "==================================================================================" << "\n";
 
     cout << "| " << setw(5) << "ID" 
-              << " | " << setw(10) << "CHU KY" 
-              << " | " << setw(12) << "NGAY BAT DAU" 
-              << " | " << setw(15) << right << "SO TIEN"
-              << " | " << setw(30) << left << "MO TA" << " |" << "\n";
+              << " | " << setw(10) << "PERIOD" 
+              << " | " << setw(12) << "START DATE" 
+              << " | " << setw(15) << right << "AMOUNT"
+              << " | " << setw(30) << left << "DESCRIPTION" << " |" << "\n";
     cout << "----------------------------------------------------------------------------------" << "\n";
 
     for (int i = 0; i < recurringList.getSize(); ++i) {
@@ -101,11 +102,11 @@ void RecurringManager::displayRecurringList() const {
         
         string periodStr;
         switch (item.getPeriod()) {
-            case Daily: periodStr = "Hang ngay"; break;
-            case Weekly: periodStr = "Hang tuan"; break;
-            case Monthly: periodStr = "Hang thang"; break;
-            case Annually: periodStr = "Hang nam"; break;
-            default: periodStr = "Khong xac dinh"; break;
+            case Daily: periodStr = "Daily"; break;
+            case Weekly: periodStr = "Weekly"; break;
+            case Monthly: periodStr = "Monthly"; break;
+            case Annually: periodStr = "Annualy"; break;
+            default: periodStr = "Unknown"; break;
         }
 
         cout << "| " << setw(5) << item.getId()

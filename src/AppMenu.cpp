@@ -4,20 +4,20 @@
 using namespace std;
 
 AppMenu::AppMenu(){
-    cout << "Khoi tao Ung dung Quan ly Tai chinh...\n";
+    cout << "Initializing Financial Management Application...\n";
 }
 
 void AppMenu::run(){
     loadData();
     Date currentDate = Date::get_date();
     cout << "\n==========================================" << "\n";
-    cout << "KIEM TRA GIAO DICH DINH KY DEN HAN (" << currentDate.toString() << ")" << "\n";
+    cout << "CHECKING DUE RECURRING TRANSACTIONS (" << currentDate.toString() << ")" << "\n";
     recurring.processDueExpenses(currentDate, Expenses, Wallets);
     cout << "==========================================" << "\n";
     int choice;
     do{
         displayMainMenu();
-        cout << "Nhap lua chon: ";
+        cout << "Enter choice:";
         if(!(cin >> choice)){
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -36,9 +36,10 @@ void AppMenu::run(){
                 break;
             case 0:
                 saveData();
+                cout << "Exiting application. Goodbye!" << endl;
                 break;
             default:
-                cout << "Lua chon khong hop le. Vui long nhap lai." << "\n";
+                cout << "Invalid choice. Please try again." << "\n";
         }  
     }while(choice);
 }
@@ -56,16 +57,17 @@ void AppMenu::loadData(){
         for(int i = 0; i < IncomeSource.getSize(); i++){
             nextSourceId = max(nextSourceId, IncomeSource[i].getID());
         }
+        cout << "Data loaded successfully." << "\n";
     }
     else{
-        cout << "Khoi tao duu lieu ban dau: ";
+        cout << "No existing data found. Initializing empty database..." << "\n";
     }
 }
 
 void AppMenu::saveData(){
-    cout << "Dang luu du lieu..." << "\n";
+    cout << "Saving data..." << "\n";
     fileHandler.saveData(Wallets, ExpenseCategories, IncomeSources, Expenses, Incomes, recurring.getRecurringList());
-    cout << "Luu du lieu hoan tat." << "\n";
+    cout << "Data saved successfully." << "\n";
 }
 
 void AppMenu::handleReportMenu(){

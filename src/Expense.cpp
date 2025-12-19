@@ -19,10 +19,4 @@ void Expense::addExpense(Wallet& wallet, DynamicArray<Expense>&list){
     wallet.adjustBalance(-amount);
 }
 
-void Expense::getDescription()const{
-    cout << '|';
-    date.toString();
-    cout << " | " << setw(15) << right << amount << "VND | " << setw(5) << right <<walletId <<" | " << setw(5) << right << categoryId
-    <<" | " << setw(30) << left << description << "\n";
-}
 

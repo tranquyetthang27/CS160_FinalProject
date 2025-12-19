@@ -1,12 +1,10 @@
 #include "..\include\Statistics.h"
-#include "..\include\Income.h"
-#include "..\include\Wallet.h"
 #include <iomanip>
 #include <algorithm>
 
 using namespace std;
 
-long long Statistics::calcNetBalance(const Date& start, const Date& end, /*const DynamicArray<Income>& in,*/ const DynamicArray<Expense>& ex){
+long long Statistics::calcNetBalance(const Date& start, const Date& end, const DynamicArray<Income>& in, const DynamicArray<Expense>& ex){
     int Total = 0;
     for(int i = 0; i < ex.getSize(); i++){
         if(ex[i].getDate().isBetween(start, end)){
@@ -23,7 +21,7 @@ long long Statistics::calcNetBalance(const Date& start, const Date& end, /*const
 
 void Statistics::reportByWallet(const DynamicArray<Wallet>& wallets, const DynamicArray<Expense>& Expenses){
     if(Expenses.isEmpty()){
-        cout << "Khong co giao dich Chi tieu nao de thong ke theo Vi.\n";
+        cout << "No expense transactions found for wallet statistics.\n";
         return;
     }
     struct ReportItem{
@@ -52,10 +50,10 @@ void Statistics::reportByWallet(const DynamicArray<Wallet>& wallets, const Dynam
         }
     }
     cout << "\n=======================================================\n";
-    cout << "          BAO CAO CHI TIEU THEO VI TIEN \n";
+    cout << "                EXPENSE REPORT BY WALLET \n";
     cout << "=======================================================\n";
-    cout << "| " << setw(25) << left << "TEN VI" 
-              << " | " << setw(15) << right << "TONG CHI (VND)" << " |\n";
+    cout << "| " << setw(25) << left << "WALLET NAME" 
+              << " | " << setw(18) << right << "TOTAL EXPENSE (VND)" << " |\n";
     cout << "-------------------------------------------------------\n" ;
 
     for(int i = 0; i < reportData.getSize(); i++){
@@ -72,7 +70,7 @@ void Statistics::reportByWallet(const DynamicArray<Wallet>& wallets, const Dynam
     cout << "=======================================================\n";
 }
 
-void Statistics::reportAnnualOverview(const int& year, /*const DynamicArray<Income>& in,*/ const DynamicArray<Expense>& ex){
+void Statistics::reportAnnualOverview(const int& year, const DynamicArray<Income>& in, const DynamicArray<Expense>& ex){
     long long monthlyIncome[13] = {0};
     long long monthlyExpense[13] = {0};
     long long totalIncome = 0;
@@ -90,33 +88,33 @@ void Statistics::reportAnnualOverview(const int& year, /*const DynamicArray<Inco
         }
     }
     cout << "\n==================================================================================" << "\n";
-    cout << "                          BAO CAO TONG QUAN NAM " << year << "\n";
+    cout << "                            ANNUAL OVERVIEW REPORT: " << year << "\n";
     cout << "==================================================================================" << "\n";
-    cout << "| " << setw(8) << "THANG" 
-              << " | " << setw(15) << right << "THU NHAP (VND)" 
-              << " | " << setw(15) << right << "CHI TIEU (VND)" 
-              << " | " << setw(15) << right << "SO DU RONG (VND)" << " |" << "\n";
+    cout << "| " << setw(8) << "MONTH" 
+              << " | " << setw(18) << right << "INCOME (VND)" 
+              << " | " << setw(18) << right << "EXPENSE (VND)" 
+              << " | " << setw(18) << right << "NET BALANCE (VND)" << " |" << "\n";
     cout << "----------------------------------------------------------------------------------" << "\n";
 
     for (int m = 1; m <= 12; ++m) {
         long long netBalance = monthlyIncome[m] - monthlyExpense[m];
         cout << "| " << setw(8) << m 
-                  << " | " << setw(15) << right << monthlyIncome[m]
-                  << " | " << setw(15) << right << monthlyExpense[m]
-                  << " | " << setw(15) << right << netBalance << " |" << "\n";
+                  << " | " << setw(18) << right << monthlyIncome[m]
+                  << " | " << setw(18) << right << monthlyExpense[m]
+                  << " | " << setw(18) << right << netBalance << " |" << "\n";
     }
     
     cout << "----------------------------------------------------------------------------------" << "\n";
-    cout << "| " << setw(8) << "TONG" 
-              << " | " << setw(15) << right << totalIncome
-              << " | " << setw(15) << right << totalExpense
-              << " | " << setw(15) << right << (totalIncome - totalExpense) << " |" << "\n";
+    cout << "| " << setw(8) << "TOTAL" 
+              << " | " << setw(18) << right << totalIncome
+              << " | " << setw(18) << right << totalExpense
+              << " | " << setw(18) << right << (totalIncome - totalExpense) << " |" << "\n";
     cout << "==================================================================================" << "\n";
 }
 
 void Statistics::groupDataByCategory(const DynamicArray<ExpenseCategory>& Categories, const DynamicArray<Expense>& Expenses){
     if(Expenses.isEmpty()){
-        cout << "Khong co giao dich Chi tieu nao de thong ke theo danh muc.\n";
+        cout << "No expense transactions found for category statistics.\n";
         return;
     }
     struct ReportItem{
@@ -145,10 +143,10 @@ void Statistics::groupDataByCategory(const DynamicArray<ExpenseCategory>& Catego
         }
     }
     cout << "\n=======================================================\n";
-    cout << "          BAO CAO CHI TIEU THEO DANH MUC \n";
+    cout << "               EXPENSE REPORT BY CATEGORY \n";
     cout << "=======================================================\n";
-    cout << "| " << setw(25) << left << "DANH MUC" 
-              << " | " << setw(15) << right << "TONG CHI (VND)" << " |\n";
+    cout << "| " << setw(25) << left << "CATEGORY" 
+              << " | " << setw(18) << right << "TOTAL EXPENSE (VND)" << " |\n";
     cout << "-------------------------------------------------------\n" ;
 
     for(int i = 0; i < reportData.getSize(); i++){

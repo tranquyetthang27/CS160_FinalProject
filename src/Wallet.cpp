@@ -1,5 +1,4 @@
 #include "../include/Wallet.h"
-#include<iostream>
 #include<iomanip>
 #include<stdexcept>
 
