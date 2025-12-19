@@ -19,7 +19,6 @@ public:
     long long getAmount()const;
     int getWalletId()const;
     int getCategoryId()const;
-    void getDescription()const;
     void addExpense(Wallet& wallet, DynamicArray<Expense>&list);
 };
 

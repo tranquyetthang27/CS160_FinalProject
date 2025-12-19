@@ -17,4 +17,4 @@ public:
     
 };
 
-#endif EXPENSECATEGORY_H
+#endif 
