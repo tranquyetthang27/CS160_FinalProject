@@ -24,6 +24,7 @@ private:
     int categoryId;
     string description;
 public:
+    RecurringExpense() = default;
     RecurringExpense(int id, const Date& startdate,RecurrencePeriod period,const long long& amount, const int& wid, const int& cid, const string& desc = "");
     int getId() const;
     Date getStartDate()const;

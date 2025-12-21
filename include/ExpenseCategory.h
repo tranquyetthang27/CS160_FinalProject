@@ -10,6 +10,7 @@ private:
     string name;
 
 public:
+    ExpenseCategory() = default;
     ExpenseCategory(int id, string name);
     int getId() const;
     string getName() const;

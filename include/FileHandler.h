@@ -4,6 +4,7 @@
 #include<string>
 #include<iostream>
 #include "DynamicArray.h"
+#include "RecurringExpense.h"
 
 using namespace std;
 
@@ -19,14 +20,15 @@ private:
     const string m_dataFilePath = "data.json";
 
 public:
-    FileHander() = default;
+    FileHandler() = default;
 
     bool saveData(
         const DynamicArray<Wallet> &wallets,
         const DynamicArray<ExpenseCategory> &expenseCategories,
         const DynamicArray<IncomeSource> &incomeSources,
         const DynamicArray<Expense> &expenses,
-        const DynamicArray<Income> &incomes
+        const DynamicArray<Income> &incomes,
+        const DynamicArray<RecurringExpense>& recurringList
     );
 
     bool loadData(
@@ -34,7 +36,8 @@ public:
         DynamicArray<ExpenseCategory> &expenseCategories,
         DynamicArray<IncomeSource> &incomeSources,
         DynamicArray<Expense> &expenses,
-        DynamicArray<Income> &incomes
+        DynamicArray<Income> &incomes,
+        DynamicArray<RecurringExpense>& recurringLists
     );
 };
 

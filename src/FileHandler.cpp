@@ -39,11 +39,12 @@
     ///--------IMPLEMENTATION---------
 
     bool FileHandler::saveData(
-        DynamicArray<Wallet> &wallets,
-        DynamicArray<ExpenseCategory> &expenseCategories,
-        DynamicArray<IncomeSource> &incomeSources,
-        DynamicArray<Expense> &expenses,
-        DynamicArray<Income> &incomes)
+        const DynamicArray<Wallet> &wallets,
+        const DynamicArray<ExpenseCategory> &expenseCategories,
+        const DynamicArray<IncomeSource> &incomeSources,
+        const DynamicArray<Expense> &expenses,
+        const DynamicArray<Income> &incomes,
+        const DynamicArray<RecurringExpense>& recurringList)
     {
         ofstream out(m_dataFilePath, ios::out | ios::binary);
         if (!out)
@@ -72,11 +73,12 @@
     }
 
     bool FileHandler::loadData(
-        const DynamicArray<Wallet> &wallets,
-        const DynamicArray<ExpenseCategory> &expenseCategories,
-        const DynamicArray<IncomeSource> &incomeSources,
-        const DynamicArray<Expense> &expenses,
-        const DynamicArray<Income> &incomes)
+        DynamicArray<Wallet> &wallets,
+        DynamicArray<ExpenseCategory> &expenseCategories,
+        DynamicArray<IncomeSource> &incomeSources,
+        DynamicArray<Expense> &expenses,
+        DynamicArray<Income> &incomes,
+        DynamicArray<RecurringExpense>& recurringList)
     {
         ifstream inp(m_dataFilePath, ios::in | ios::binary);
         if (!inp)

@@ -8,6 +8,7 @@ class Date{
         int d, m, y;
     public:
         Date(int d, int m, int y);
+        Date() = default;
         static Date get_date();
         void changeDate(const Date& other){d = other.d, m = other.m, y = other.y;}
         int get_day(){return d;};

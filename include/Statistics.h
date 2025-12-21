@@ -16,4 +16,4 @@ public:
     void groupDataByCategory(const DynamicArray<ExpenseCategory>& ExCate, const DynamicArray<Expense>& ex);
 };
 
-#endif STATISTICS_H
+#endif 

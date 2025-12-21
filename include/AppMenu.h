@@ -22,7 +22,8 @@ private:
     int nextCategogyId;
     int nextSourceId;
 
-
+    Wallet* findWalletById(const int id);
+    ExpenseCategory* findCategoryById(const int id);
     void displayMainMenu();
     void handleTransactionMenu();
     void handleReportMenu();
@@ -34,6 +35,7 @@ private:
     void inputNewCategory();
     void inputNewIncome();
     void inputNewSource();
+
 public:
     AppMenu();
     void run();

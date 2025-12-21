@@ -15,6 +15,7 @@ private:
     string description;
 public:
     Expense(const Date& date,const long long& amount, const int& wid, const int& cid, const string& desc = "");
+    Expense() = default;
     Date getDate()const;
     long long getAmount()const;
     int getWalletId()const;

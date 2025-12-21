@@ -54,8 +54,8 @@ void AppMenu::loadData(){
         for(int i = 0; i < Wallets.getSize(); i++){
             nextWalletId = max(nextWalletId, Wallets[i].getID());
         }
-        for(int i = 0; i < IncomeSource.getSize(); i++){
-            nextSourceId = max(nextSourceId, IncomeSource[i].getID());
+        for(int i = 0; i < IncomeSources.getSize(); i++){
+            nextSourceId = max(nextSourceId, IncomeSources[i].getID());
         }
         cout << "Data loaded successfully." << "\n";
     }
@@ -140,7 +140,7 @@ void AppMenu::handleNetBalanceReport() {
         return;
     }
 
-    long long balance = stats.calcNetBalance(startDate, endDate, Expenses);
+    long long balance = stats.calcNetBalance(startDate, endDate, Incomes, Expenses);
     
     cout << "\n--- REPORT ---" << "\n";
     cout << "Net Balance from " << startDate.toString() << " to " << endDate.toString() << ": " << balance << " VND" << "\n";
@@ -156,7 +156,7 @@ void AppMenu::handleAnnualReport() {
         return;
     }
     
-    stats.reportAnnualOverview(year, Expenses);
+    stats.reportAnnualOverview(year, Incomes, Expenses);
 }
 
 void AppMenu::handleTransactionMenu() {
@@ -165,6 +165,8 @@ void AppMenu::handleTransactionMenu() {
         cout << "\n--- TRANSACTION MENU ---" << "\n";
         cout << "1. Input New Expense" << "\n";
         cout << "2. Input New Income" << "\n";
+        cout << "3. Input New ExpenseCategory" << "\n";
+        cout << "4. input New IncomeSource" << "\n";
         cout << "0. Back to Main Menu" << "\n"; 
         cout << "Enter choice: ";
         
@@ -180,6 +182,12 @@ void AppMenu::handleTransactionMenu() {
                 break;
             case 2:
                 inputNewIncome();
+                break;
+            case 3:
+                inputNewCategory();
+                break;
+            case 4:
+                inputNewSource();
                 break;
             case 0:
                 cout << "Returning to Main Menu." << "\n";
@@ -231,7 +239,7 @@ void AppMenu::inputNewExpense() {
         cin.clear(); cin.ignore(numeric_limits<streamsize>::max(), '\n');
         return;
     }
-    Wallet* targetWallet = findWalletById(walletId);
+    Wallet* targetWallet = AppMenu::findWalletById(walletId);
     if (!targetWallet) {
         cout << "Error: Wallet with ID " << walletId << " not found." << "\n";
         return;
@@ -358,12 +366,12 @@ void AppMenu::inputNewIncome() {
     Income newInc(Date::get_date(), amount, walletId, sourceId, desc); 
     
     targetWallet->adjustBalance(amount);
-    incomes.push_back(newInc); 
+    Incomes.push_back(newInc); 
     
     cout << ">> Income transaction recorded successfully." << "\n";
 }
 
-void AppMenu::inputNewIncomeSource() {
+void AppMenu::inputNewSource() {
     cout << "\n--- ADD NEW INCOME SOURCE ---" << "\n";
     string name;
     
@@ -378,7 +386,7 @@ void AppMenu::inputNewIncomeSource() {
     
     IncomeSource newSource(nextSourceId, name);
     IncomeSources.push_back(newSource);
-    nextSourceID++;
+    nextSourceId++;
     cout << ">> New Income Source '" << name << "' added successfully (Pending final integration of IncomeSource class)." << "\n";
 }
 
@@ -391,4 +399,18 @@ void AppMenu::displayMainMenu() {
     cout << "3. Setup & Configuration (Wallets, Categories)" << "\n";
     cout << "0. Exit & Save Data" << "\n";
     cout << "--------------------------------------------------" << "\n";
+}
+
+Wallet* AppMenu::findWalletById(const int id){
+    for(int i = 0; i < Wallets.getSize(); i++){
+        if(Wallets[i].getID() == id)return &Wallets[i];
+    }
+    return nullptr;
+}
+
+ExpenseCategory* AppMenu::findCategoryById(const int id){
+    for(int i = 0; i < ExpenseCategories.getSize(); i++){
+        if(ExpenseCategories[i].getId() == id)return &ExpenseCategories[i];
+    }
+    return nullptr;
 }
