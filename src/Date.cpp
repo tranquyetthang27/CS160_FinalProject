@@ -5,6 +5,18 @@ using namespace std;
 
 int dayinmonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
+void Date::write2Binary(ofstream& out)const{
+    out.write((char*)&d, sizeof(int));
+    out.write((char*)&m, sizeof(int));
+    out.write((char*)&y, sizeof(int));
+}
+
+void Date::readFromBinary(ifstream& in){
+    in.read((char*)&d, sizeof(int));
+    in.read((char*)&y, sizeof(int));
+    in.read((char*)&y, sizeof(int));
+}
+
 string inttoString(int x){
     string res = "";
     while(x){

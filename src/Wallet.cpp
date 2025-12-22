@@ -39,3 +39,20 @@ void Wallet::printDetails() const
     cout << "Name: " << setw(20) << left << m_name << " | ";
     cout << "Balance: " << setw(15) << right << m_balance << " VND |\n";
 }
+
+void Wallet::write2Binary(ofstream& out)const{
+    out.write((char*)&m_id, sizeof(m_id));
+    size_t sz = m_name.size();
+    out.write((char*)&sz, sizeof(sz));
+    out.write(m_name.c_str(), sz);
+    out.write((char*)&m_balance, sizeof(m_balance));
+}
+
+void Wallet::readFromBinary(ifstream& in){
+    in.read((char*)&m_id, sizeof(m_id));
+    size_t sz;
+    in.read((char*)&sz, sizeof(sz));
+    m_name.resize(sz);
+    in.read(&m_name[0], sz);
+    in.read((char*)&m_balance, sizeof(m_balance));
+}

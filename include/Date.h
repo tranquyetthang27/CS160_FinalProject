@@ -1,12 +1,15 @@
 # ifndef DATE_H
 # define DATE_H
-
+#include <string>
+#include <fstream>
 using namespace std;
 
 class Date{
     private:
         int d, m, y;
     public:
+        void write2Binary(ofstream & out)const;
+        void readFromBinary(ifstream & in);
         Date(int d, int m, int y);
         Date() = default;
         static Date get_date();

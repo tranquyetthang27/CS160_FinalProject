@@ -3,7 +3,7 @@
 
 #include<string>
 #include<iostream>
-
+#include<fstream>
 //#pragma once
 
 using namespace std;
@@ -30,6 +30,10 @@ public:
     void adjustBalance(const long long &amount);
 
     void printDetails() const;
+
+    void write2Binary(ofstream& out)const;
+    void readFromBinary(ifstream& in);
+
 };
 
 #endif // WALLET_H

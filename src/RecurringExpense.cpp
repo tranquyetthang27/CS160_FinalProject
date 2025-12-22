@@ -27,3 +27,31 @@ string RecurringExpense::getDescription()const{
 }
 
 void RecurringExpense::setStartDay(const Date& date){startDate.changeDate(date);};
+
+void RecurringExpense::write2Binary(ofstream& out)const{
+    out.write((char*)&id, sizeof(id));
+    startDate.write2Binary(out);
+    int periodVal = static_cast<int>(period);
+    out.write((char*)&periodVal, sizeof(periodVal));
+    out.write((char*)&amount, sizeof(amount));
+    out.write((char*)&walletId, sizeof(walletId));
+    out.write((char*)&categoryId, sizeof(categoryId));
+    size_t sz = description.size();
+    out.write((char*)&sz, sizeof(sz));
+    out.write(description.c_str(), sz);
+}
+
+void RecurringExpense::readFromBinary(ifstream& in){
+    in.read((char*)&id, sizeof(id));
+    startDate.readFromBinary(in);
+    int periodVal;
+    in.read((char*)&periodVal, sizeof(periodVal));
+    period = static_cast<RecurrencePeriod>(periodVal);
+    in.read((char*)&amount, sizeof(amount));
+    in.read((char*)&walletId, sizeof(walletId));
+    in.read((char*)&categoryId, sizeof(categoryId));
+    size_t sz;
+    in.read((char*)&sz, sizeof(sz));
+    description.resize(sz);
+    in.read(&description[0], sz);
+}

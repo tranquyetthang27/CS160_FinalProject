@@ -1,10 +1,10 @@
 #ifndef RECURRINGEXPENSE_H
 #define RECURRINGEXPENSE_H
 #include <string>
-#include "Date.h"
 #include "DynamicArray.h"
 #include "Wallet.h"
 #include "Expense.h"
+#include <fstream>
 using namespace std;
 
 enum RecurrencePeriod{
@@ -35,6 +35,8 @@ public:
     string getDescription()const;
     Expense createExpense(const Date& date);
     void setStartDay(const Date& date);
+    void write2Binary(ofstream& out)const;
+    void readFromBinary(ifstream& in);
 };
 
 

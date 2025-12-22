@@ -14,6 +14,8 @@ private:
     int categoryId;
     string description;
 public:
+    void write2Binary(ofstream& out)const;
+    void readFromBinary(ifstream& in);
     Expense(const Date& date,const long long& amount, const int& wid, const int& cid, const string& desc = "");
     Expense() = default;
     Date getDate()const;

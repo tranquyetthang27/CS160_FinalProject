@@ -165,8 +165,6 @@ void AppMenu::handleTransactionMenu() {
         cout << "\n--- TRANSACTION MENU ---" << "\n";
         cout << "1. Input New Expense" << "\n";
         cout << "2. Input New Income" << "\n";
-        cout << "3. Input New ExpenseCategory" << "\n";
-        cout << "4. input New IncomeSource" << "\n";
         cout << "0. Back to Main Menu" << "\n"; 
         cout << "Enter choice: ";
         
@@ -182,12 +180,6 @@ void AppMenu::handleTransactionMenu() {
                 break;
             case 2:
                 inputNewIncome();
-                break;
-            case 3:
-                inputNewCategory();
-                break;
-            case 4:
-                inputNewSource();
                 break;
             case 0:
                 cout << "Returning to Main Menu." << "\n";
