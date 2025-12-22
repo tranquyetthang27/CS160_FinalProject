@@ -45,7 +45,7 @@ void Statistics::reportByWallet(const DynamicArray<Wallet>& wallets, const Dynam
         }
     }
     for(int i = 0; i < reportData.getSize(); i ++){
-        for(int j = i + 1; j < reportData.getSize(); i ++){
+        for(int j = i + 1; j < reportData.getSize(); j ++){
             if(reportData[i].totalExpense < reportData[j].totalExpense)swap(reportData[i], reportData[j]);
         }
     }
@@ -138,7 +138,7 @@ void Statistics::groupDataByCategory(const DynamicArray<ExpenseCategory>& Catego
         }
     }
     for(int i = 0; i < reportData.getSize(); i ++){
-        for(int j = i + 1; j < reportData.getSize(); i ++){
+        for(int j = i + 1; j < reportData.getSize(); j ++){
             if(reportData[i].totalExpense < reportData[j].totalExpense)swap(reportData[i], reportData[j]);
         }
     }
