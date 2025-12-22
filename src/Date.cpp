@@ -13,7 +13,7 @@ void Date::write2Binary(ofstream& out)const{
 
 void Date::readFromBinary(ifstream& in){
     in.read((char*)&d, sizeof(int));
-    in.read((char*)&y, sizeof(int));
+    in.read((char*)&m, sizeof(int));
     in.read((char*)&y, sizeof(int));
 }
 
