@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Wallet::Wallet(const int &id, const string &name, const long long &init = 0) : m_id(id), m_name(name), m_balance(init)
+Wallet::Wallet(const int &id, const string &name, const long long &init) : m_id(id), m_name(name), m_balance(init)
 {
     if (init < 0) throw std::invalid_argument("The initial balance must be positive!\n");
 }
@@ -55,4 +55,5 @@ void Wallet::readFromBinary(ifstream& in){
     m_name.resize(sz);
     in.read(&m_name[0], sz);
     in.read((char*)&m_balance, sizeof(m_balance));
+
 }
