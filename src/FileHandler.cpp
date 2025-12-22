@@ -1,6 +1,10 @@
 #include "../include/FileHandler.h"
+#include "../include/Wallet.h"
+#include "../include/Expense.h"
+#include "../include/Income.h"
 #include "../include/ExpenseCategory.h"
 #include "../include/IncomeSource.h"
+#include "../include/RecurringExpense.h"
 
 
 using namespace std;
@@ -103,3 +107,4 @@ bool FileHandler::loadData(
     cout << "Finish uploading data from " << m_dataFilePath << "!\n";
     return true;
 }
+
