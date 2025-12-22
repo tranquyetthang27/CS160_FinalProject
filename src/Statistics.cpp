@@ -5,7 +5,7 @@
 using namespace std;
 
 long long Statistics::calcNetBalance(const Date& start, const Date& end, const DynamicArray<Income>& in, const DynamicArray<Expense>& ex){
-    int Total = 0;
+    long long Total = 0;
     for(int i = 0; i < ex.getSize(); i++){
         if(ex[i].getDate().isBetween(start, end)){
             Total -= ex[i].getAmount();
