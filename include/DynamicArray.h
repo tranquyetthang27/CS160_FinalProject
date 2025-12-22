@@ -85,7 +85,7 @@ class DynamicArray
         {
             if (index < 0 || index >= m_size)
             {
-                throw std::out_of_range();
+                throw std::out_of_range("DynamicArray: Index out of range");
             }
             return m_data[index];
         }
@@ -116,4 +116,5 @@ class DynamicArray
 };
 
 #endif
+
 
