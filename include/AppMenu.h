@@ -4,6 +4,7 @@
 #include "Statistics.h"
 #include "IncomeSource.h"
 #include "FileHandler.h"
+#include<cstdlib>
 using namespace std;
 
 class AppMenu{
@@ -35,6 +36,7 @@ private:
     void inputNewCategory();
     void inputNewIncome();
     void inputNewSource();
+    void inputNewWallet();
 
 public:
     AppMenu();

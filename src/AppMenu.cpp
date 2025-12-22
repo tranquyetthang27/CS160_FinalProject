@@ -26,20 +26,30 @@ void AppMenu::run(){
         }
         switch (choice){
             case 1:
+                system("cls");
                 handleTransactionMenu();
+                system("cls");
                 break;
             case 2:
+                system("cls");
                 handleReportMenu();
+                system("cls");
                 break;
             case 3:
+                system("cls");
                 handleSetupMenu();
+                system("cls");
                 break;
             case 0:
+                system("cls");
                 saveData();
                 cout << "Exiting application. Goodbye!" << endl;
                 break;
             default:
+                system("cls");
                 cout << "Invalid choice. Please try again." << "\n";
+                system("pause");
+                system("cls");
         }  
     }while(choice);
 }
@@ -48,6 +58,9 @@ void AppMenu::run(){
 void AppMenu::loadData(){
     if((fileHandler.loadData(Wallets, ExpenseCategories, IncomeSources, Expenses, Incomes, recurring.getRecurringList()))){
         recurring.setNextRecurringId(recurring.getMaxId());
+        nextCategogyId = 1;
+        nextSourceId = 1;
+        nextWalletId = 1;
         for(int i = 0; i < ExpenseCategories.getSize(); i++){
             nextCategogyId = max(nextCategogyId, ExpenseCategories[i].getId());
         }
@@ -90,25 +103,46 @@ void AppMenu::handleReportMenu(){
 
         switch (choice) {
             case 1:
+                system("cls");
                 recurring.displayRecurringList();
+                system("pause");
+                system("cls");
                 break;
             case 2:
+                system("cls");
                 handleNetBalanceReport();
+                system("pause");
+                system("cls");
                 break;
             case 3:
+                system("cls");
                 stats.reportByWallet(Wallets, Expenses); 
+                system("pause");
+                system("cls");
                 break;
             case 4:
+                system("cls");
                 handleAnnualReport();
+                system("pause");
+                system("cls");
                 break;
             case 5:
+                system("cls");
                 stats.groupDataByCategory(ExpenseCategories, Expenses);
+                system("pause");
+                system("cls");
                 break;
             case 0:
+                system("cls");
                 cout << "Returning to Main Menu." << "\n";
+                system("pause");
+                system("cls");
                 break;
             default:
+                system("cls");
                 cout << "Invalid choice." << "\n";
+                system("pause");
+                system("cls");
         }
     } while (choice != 0);
 }
@@ -176,16 +210,28 @@ void AppMenu::handleTransactionMenu() {
 
         switch (choice) {
             case 1:
+                system("cls");
                 inputNewExpense();
+                system("pause");
+                system("cls");
                 break;
             case 2:
+                system("cls");
                 inputNewIncome();
+                system("pause");
+                system("cls");
                 break;
             case 0:
+                system("cls");
                 cout << "Returning to Main Menu." << "\n";
+                system("pause");
+                system("cls");
                 break;
             default:
+                system("cls");
                 cout << "Invalid choice." << "\n";
+                system("pause");
+                system("cls");
         }
     } while (choice != 0);
 }
@@ -196,18 +242,44 @@ void AppMenu::handleSetupMenu() {
         cout << "\n--- SETUP & CONFIGURATION MENU ---" << "\n";
         cout << "1. Add New Expense Category" << "\n"; 
         cout << "2. Add New Income Source" << "\n";
+        cout << "3. Input New Wallet" << "\n";
         cout << "0. Back to Main Menu" << "\n";
+        cout << "Enter choice: ";
+        if (!(cin >> choice)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            choice = -1;
+        }
         switch (choice) {
             case 1:
+                system("cls");
                 inputNewCategory(); 
+                system("pause");
+                system("cls");
                 break;
             case 2:
+                system("cls");
                 inputNewSource();
+                system("pause");
+                system("cls");
+                break;
+            case 3:
+                system("cls");
+                inputNewWallet();
+                system("pause");
+                system("cls");
                 break;
             case 0:
+                system("cls");
                 cout << "Returning to Main Menu." << "\n";
+                system("pause");
+                system("cls");
+                break;
             default:
+                system("cls");
                 cout << "Invalid choice." << "\n";
+                system("pause");
+                system("cls");
         }
     } while (choice != 0);
 }
@@ -321,13 +393,7 @@ void AppMenu::inputNewIncome() {
         cin.clear(); cin.ignore(numeric_limits<streamsize>::max(), '\n');
         return;
     }
-    Wallet* targetWallet = nullptr;
-    for(int i = 0; i < Wallets.getSize(); i++){
-        if(Wallets[i].getID() == walletId){
-            targetWallet = &Wallets[i];
-            break;
-        }
-    }
+    Wallet* targetWallet = findWalletById(walletId);
     if (!targetWallet) {
         cout << "Error: Wallet with ID " << walletId << " not found." << "\n";
         return;
@@ -379,7 +445,7 @@ void AppMenu::inputNewSource() {
     IncomeSource newSource(nextSourceId, name);
     IncomeSources.push_back(newSource);
     nextSourceId++;
-    cout << ">> New Income Source '" << name << "' added successfully (Pending final integration of IncomeSource class)." << "\n";
+    cout << ">> New Income Source '" << name << "' added successfully  (ID: " << newSource.getID() << ")." << "\n";
 }
 
 void AppMenu::displayMainMenu() {
@@ -405,4 +471,26 @@ ExpenseCategory* AppMenu::findCategoryById(const int id){
         if(ExpenseCategories[i].getId() == id)return &ExpenseCategories[i];
     }
     return nullptr;
+}
+
+void AppMenu::inputNewWallet(){
+    cout << "--- ADD NEW WALLET ---" << endl;
+
+    string name;
+    long long initialBalance;
+
+    cout << "Enter Wallet Name: ";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+    getline(cin, name); 
+    cout << "Enter Initial Balance: ";
+    while (!(cin >> initialBalance)) {
+        cout << "Invalid input. Please enter a number: ";
+        cin.clear();
+        cin.ignore(1000, '\n');
+    }
+
+    Wallet newWallet(nextWalletId, name, initialBalance);
+    Wallets.push_back(newWallet);
+    nextWalletId ++;
+    cout << ">> New Wallet '" << name << "' added successfully  (ID: " << newWallet.getID() << ")." << "\n";
 }

@@ -61,6 +61,7 @@ bool FileHandler::saveData(
         writeArray2Binary(incomeSources, out);
         writeArray2Binary(expenses, out);
         writeArray2Binary(incomes, out);
+        writeArray2Binary(recurringList, out);
     }
     catch(const std::exception &e)
     {
@@ -95,6 +96,7 @@ bool FileHandler::loadData(
         readArrayFromBinary(incomeSources, inp);
         readArrayFromBinary(expenses, inp);
         readArrayFromBinary(incomes, inp);
+        readArrayFromBinary(recurringList, inp);
     }
     catch(const std::exception &e)
     {
@@ -102,7 +104,6 @@ bool FileHandler::loadData(
         inp.close();
         return false;
     }
-
     inp.close();
     cout << "Finish uploading data from " << m_dataFilePath << "!\n";
     return true;

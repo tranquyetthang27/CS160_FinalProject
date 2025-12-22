@@ -20,7 +20,7 @@ void Date::readFromBinary(ifstream& in){
 string inttoString(int x){
     string res = "";
     while(x){
-        res = char(x%10) + res;
+        res = char(x%10 + '0') + res;
         x/=10;
     }
     return res;
