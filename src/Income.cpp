@@ -68,8 +68,9 @@ void Income::readFromBinary(ifstream &inp)
     inp.read((char*)&walletID, sizeof(walletID));
     inp.read((char*)&sourceID, sizeof(sourceID));
 
-    int sz = 0;
+    size_t sz = 0;
     inp.read((char*)&sz, sizeof(sz));
     description.resize(sz);
     inp.read(&description[0], sz);
 }
+
