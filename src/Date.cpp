@@ -58,7 +58,7 @@ void Date::addDays(int target){
 
 void Date::addMonths(int target){
     m += target;
-    if(m > 12){
+    while(m > 12){
         y ++;
         m -= 12;
         d = min(d, dayinmonth[m]);
