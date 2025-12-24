@@ -242,7 +242,13 @@ void AppMenu::handleSetupMenu() {
         cout << "\n--- SETUP & CONFIGURATION MENU ---" << "\n";
         cout << "1. Add New Expense Category" << "\n"; 
         cout << "2. Add New Income Source" << "\n";
-        cout << "3. Input New Wallet" << "\n";
+        cout << "3. Add New Wallet" << "\n";
+        cout << "4. List all Expense Caterories" << "\n";
+        cout << "5. List all Income Sources" << "\n";
+        cout << "6. List all Wallets" << "\n";
+        cout << "7. Edit/Delete Expense Category" << "\n";
+        cout << "8. Edit/Delete Income Source" << "\n";
+        cout << "9. Edit/Delete Wallet" << "\n";
         cout << "0. Back to Main Menu" << "\n";
         cout << "Enter choice: ";
         if (!(cin >> choice)) {
@@ -266,6 +272,42 @@ void AppMenu::handleSetupMenu() {
             case 3:
                 system("cls");
                 inputNewWallet();
+                system("pause");
+                system("cls");
+                break;
+            case 4:
+                system("cls");
+                listAllCategories();
+                system("pause");
+                system("cls");
+                break;
+            case 5:
+                system("cls");
+                listAllIncomeSources();
+                system("pause");
+                system("cls");
+                break;
+            case 6:
+                system("cls");
+                listAllWallets();
+                system("pause");
+                system("cls");
+                break;
+            case 7:
+                system("cls");
+                editCategory();
+                system("pause");
+                system("cls");
+                break;
+            case 8:
+                system("cls");
+                editSource();
+                system("pause");
+                system("cls");
+                break;
+            case 9:
+                system("cls");
+                editWallet();
                 system("pause");
                 system("cls");
                 break;
@@ -454,7 +496,7 @@ void AppMenu::displayMainMenu() {
     cout << "==================================================" << "\n";
     cout << "1. Transactions (Income/Expense)" << "\n";
     cout << "2. Reports & Statistics" << "\n";
-    cout << "3. Setup & Configuration (Wallets, Categories)" << "\n";
+    cout << "3. Setup & Configuration (Wallets, Categories, IncomeSources)" << "\n";
     cout << "0. Exit & Save Data" << "\n";
     cout << "--------------------------------------------------" << "\n";
 }
@@ -493,4 +535,248 @@ void AppMenu::inputNewWallet(){
     Wallets.push_back(newWallet);
     nextWalletId ++;
     cout << ">> New Wallet '" << name << "' added successfully  (ID: " << newWallet.getID() << ")." << "\n";
+}
+
+void AppMenu::listAllWallets() {
+    cout << "--- LIST OF ALL WALLETS ---" << endl;
+    
+    if (Wallets.getSize() == 0) {
+        cout << "No wallets found. Please add a wallet first!" << endl;
+        return;
+    }
+
+    cout << left << setw(5) << "ID" 
+         << setw(20) << "Wallet Name" 
+         << setw(15) << "Balance" << endl;
+    cout << string(40, '-') << endl;
+
+    for (int i = 0; i < Wallets.getSize(); ++i) {
+        Wallets[i].display();
+    }
+    
+    cout << "\nTotal wallets: " << Wallets.getSize() << "\n";
+}
+
+void AppMenu::listAllCategories() {
+    cout << "--- LIST OF EXPENSE CATEGORIES ---" << endl;
+
+    if (ExpenseCategories.getSize() == 0) {
+        cout << "No categories found. Please add one in Setup Menu!" << endl;
+        return;
+    }
+
+    cout << left << setw(10) << "ID" 
+         << setw(30) << "Category Name" << endl;
+    cout << string(40, '-') << endl;
+
+    for (int i = 0; i < ExpenseCategories.getSize(); ++i) {
+        ExpenseCategories[i].display();
+    }
+
+    cout << "\nTotal categories: " << ExpenseCategories.getSize() << endl;
+}
+
+void AppMenu::listAllIncomeSources() {
+    cout << "--- LIST OF INCOME SOURCES ---" << "\n";
+
+    if (IncomeSources.getSize() == 0) {
+        cout << "No income sources found. Please add a new one!" << "\n";
+        return;
+    }
+
+    cout << left << setw(10) << "ID" 
+         << setw(30) << "Source Name" << "\n";
+    cout << string(40, '-') << "\n";
+
+    for (int i = 0; i < IncomeSources.getSize(); ++i) {
+        IncomeSources[i].display();
+    }
+
+    cout << "\nTotal income sources: " << IncomeSources.getSize() << "\n";
+}
+void AppMenu::editCategory() {
+    cout << "--- EDIT OR DELETE EXPENSE CATEGORY ---" << "\n";
+
+    if (ExpenseCategories.getSize() == 0) {
+        cout << "No categories available to edit!" << "\n";
+        return;
+    }
+
+    int id;
+    cout << "\nEnter Category ID to edit/delete: ";
+    if (!(cin >> id)) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Invalid ID format!" << "\n";
+        return;
+    }
+    cin.ignore(1000, '\n');
+    int foundIndex = -1;
+    for (int i = 0; i < ExpenseCategories.getSize(); ++i) {
+        if (ExpenseCategories[i].getId() == id) {
+            foundIndex = i;
+            break;
+        }
+    }
+
+    if (foundIndex == -1) {
+        cout << "Category ID " << id << " not found!" << "\n";
+        return;
+    }
+
+    cout << "\nCategory found: " << ExpenseCategories[foundIndex].getName() << "\n";
+    cout << "1. Edit Name" << "\n";
+    cout << "2. Delete Category" << "\n";
+    cout << "0. Cancel" << "\n";
+    cout << "Your choice: ";
+
+    int subChoice;
+    cin >> subChoice;
+    cin.ignore(1000, '\n');
+
+    if (subChoice == 1) {
+        string newName;
+        cout << "Enter new name: ";
+        getline(cin >> ws, newName);
+        ExpenseCategories[foundIndex].setName(newName);
+        cout << "Category updated successfully!" << "\n";
+    } 
+    else if (subChoice == 2) {
+        ExpenseCategories.removeAt(foundIndex); 
+        cout << "Category deleted successfully!" << "\n";
+    }
+    else {
+        cout << "Operation cancelled." << "\n";
+    }
+}
+
+void AppMenu::editSource() {
+    cout << "--- EDIT OR DELETE INCOME SOURCE ---" << "\n";
+
+    if (IncomeSources.getSize() == 0) {
+        cout << "No income sources available to edit!" << "\n";
+        return;
+    }
+    int id;
+    cout << "\nEnter Income Source ID to edit/delete: ";
+    if (!(cin >> id)) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Invalid ID format!" << "\n";
+        return;
+    }
+    cin.ignore(1000, '\n');
+    int foundIndex = -1;
+    for (int i = 0; i < IncomeSources.getSize(); ++i) {
+        if (IncomeSources[i].getID() == id) {
+            foundIndex = i;
+            break;
+        }
+    }
+
+    if (foundIndex == -1) {
+        cout << "Income Source ID " << id << " not found!" << "\n";
+        return;
+    }
+
+    cout << "\nSource found: " << IncomeSources[foundIndex].getName() << "\n";
+    cout << "1. Edit Name" << "\n";
+    cout << "2. Delete Source" << "\n";
+    cout << "0. Cancel" << "\n";
+    cout << "Your choice: ";
+
+    int subChoice;
+    if (!(cin >> subChoice)) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        subChoice = 0;
+    }
+    cin.ignore(1000, '\n');
+
+    if (subChoice == 1) {
+        string newName;
+        cout << "Enter new name for this source: ";
+        getline(cin >> ws, newName);
+        IncomeSources[foundIndex].setName(newName);
+        cout << "Income source updated successfully!" << "\n";
+    } 
+    else if (subChoice == 2) {
+        IncomeSources.removeAt(foundIndex); 
+        cout << "Income source deleted successfully!" <<"\n";
+    }
+    else {
+        cout << "Operation cancelled." << "\n";
+    }
+}
+
+void AppMenu::editWallet() {
+    cout << "--- EDIT OR DELETE WALLET ---" << "\n";
+
+    if (Wallets.getSize() == 0) {
+        cout << "No wallets available to edit!" << "\n";
+        return;
+    }
+
+    int id;
+    cout << "\nEnter Wallet ID to edit/delete: ";
+    if (!(cin >> id)) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Invalid ID format!" << "\n";
+        return;
+    }
+    cin.ignore(1000, '\n');
+
+    int foundIndex = -1;
+    for (int i = 0; i < Wallets.getSize(); ++i) {
+        if (Wallets[i].getID() == id) {
+            foundIndex = i;
+            break;
+        }
+    }
+
+    if (foundIndex == -1) {
+        cout << "Wallet ID " << id << " not found!" << "\n";
+        return;
+    }
+
+    cout << "\nWallet found: " << Wallets[foundIndex].getName() 
+         << " (Balance: " << Wallets[foundIndex].getBalance() << ")" << "\n";
+    cout << "1. Edit Name" << "\n";
+    cout << "2. Delete Wallet" << "\n";
+    cout << "0. Cancel" << "\n";
+    cout << "Your choice: ";
+
+    int subChoice;
+    if (!(cin >> subChoice)) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        subChoice = 0;
+    }
+    cin.ignore(1000, '\n');
+
+    if (subChoice == 1) {
+        string newName;
+        cout << "Enter new name for this wallet: ";
+        getline(cin >> ws, newName);
+        Wallets[foundIndex].setName(newName);
+        cout << "Wallet name updated successfully!" << "\n";
+    } 
+    else if (subChoice == 2) {
+        if (Wallets[foundIndex].getBalance() != 0) {
+            cout << "Warning: This wallet still has a balance. Proceed with deletion? (y/n): ";
+            char confirm;
+            cin >> confirm;
+            if (confirm != 'y' && confirm != 'Y') {
+                cout << "Deletion cancelled." << "\n";
+                return;
+            }
+        }
+        
+        Wallets.removeAt(foundIndex); 
+        cout << "Wallet deleted successfully!" << "\n";
+    }
+    else {
+        cout << "Operation cancelled." << "\n";
+    }
 }

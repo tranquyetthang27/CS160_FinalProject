@@ -4,6 +4,7 @@
 #include<string>
 #include<iostream>
 #include<fstream>
+#include<iomanip>
 //#pragma once
 
 using namespace std;
@@ -33,7 +34,11 @@ public:
 
     void write2Binary(ofstream& out)const;
     void readFromBinary(ifstream& in);
-
+    void display() const {
+    cout << left << setw(5) << m_id 
+         << setw(20) << m_name 
+         << setw(15) << m_balance << "\n";
+    }
 };
 
 #endif // WALLET_H

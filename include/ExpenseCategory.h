@@ -18,7 +18,9 @@ public:
     int getId() const;
     string getName() const;
     void setName(const string& newname);
-    
+    void display()const;
+
+
 };
 
 #endif 

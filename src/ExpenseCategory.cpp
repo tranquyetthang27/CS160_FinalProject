@@ -30,3 +30,8 @@ void ExpenseCategory::readFromBinary(ifstream& in){
     name.resize(sz);
     in.read(&name[0], sz);
 }
+
+void ExpenseCategory::display() const {
+    cout << left << setw(10) << id 
+         << setw(30) << name << endl;
+}

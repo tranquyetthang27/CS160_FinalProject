@@ -37,6 +37,12 @@ private:
     void inputNewIncome();
     void inputNewSource();
     void inputNewWallet();
+    void listAllWallets();
+    void listAllCategories();
+    void listAllIncomeSources();
+    void editCategory();
+    void editSource();
+    void editWallet();
 
 public:
     AppMenu();
