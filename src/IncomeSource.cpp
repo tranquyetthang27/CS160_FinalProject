@@ -31,7 +31,6 @@ void IncomeSource::Display() const
 void IncomeSource::write2Binary(ofstream &out) const
 {
     out.write((char*)&id, sizeof(id));
-
     size_t sz = name.size();
     out.write((char*)&sz, sizeof(sz));
     out.write(name.c_str(), sz);
@@ -40,8 +39,7 @@ void IncomeSource::write2Binary(ofstream &out) const
 void IncomeSource::readFromBinary(ifstream &inp)
 {
     inp.read((char*)&id, sizeof(id));
-
-    int sz = 0;
+    size_t sz = 0;
     inp.read((char*)&sz, sizeof(sz));
     name.resize(sz);
     inp.read(&name[0], sz);

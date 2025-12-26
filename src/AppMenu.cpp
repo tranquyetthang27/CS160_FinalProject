@@ -45,6 +45,7 @@ void AppMenu::run(){
                 system("cls");
                 saveData();
                 cout << "Exiting application. Goodbye!" << endl;
+                system("pause");
                 break;
             default:
                 system("cls");

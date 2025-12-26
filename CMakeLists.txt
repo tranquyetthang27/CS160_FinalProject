@@ -1,6 +1,6 @@
 # Tên dự án, tuân thủ yêu cầu đặt tên trong tài liệu
 cmake_minimum_required(VERSION 3.10)
-project(PersonalFinanceManager LANGUAGES CXX)
+project(PersonalFinanceManager VERSION 1.0 LANGUAGES CXX)
 
 # Thiết lập chuẩn C++ (Sử dụng C++11 hoặc C++14 trở lên là khuyến nghị tốt)
 set(CMAKE_CXX_STANDARD 14)
@@ -23,7 +23,7 @@ include_directories(${INCLUDE_DIR})
 # Tên file thực thi sẽ là PersonalFinanceManager
 add_executable(PersonalFinanceManager ${PROJECT_SOURCES})
 
-# Thiết lập thư mục đầu ra cho file thực thi (tùy chọn, thường là build/bin)
+# Thiết lập thư mục đầu ra cho file thực thi
 set_target_properties(PersonalFinanceManager PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
