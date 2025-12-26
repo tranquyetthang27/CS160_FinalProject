@@ -21,9 +21,9 @@ void Expense::addExpense(Wallet& wallet, DynamicArray<Expense>&list){
 
 void Expense::write2Binary(ofstream& out)const{
     date.write2Binary(out);
-    out.write((char*)&amount, sizeof(long long));
-    out.write((char*)&walletId, sizeof(int));
-    out.write((char*)&categoryId, sizeof(int));
+    out.write((char*)&amount, sizeof(amount));
+    out.write((char*)&walletId, sizeof(walletId));
+    out.write((char*)&categoryId, sizeof(categoryId));
     size_t sz = description.size();
     out.write((char*)&sz, sizeof(sz));
     out.write(description.c_str(), sz);
@@ -31,9 +31,9 @@ void Expense::write2Binary(ofstream& out)const{
 
 void Expense::readFromBinary(ifstream& in){
     date.readFromBinary(in);
-    in.read((char*)&amount, sizeof(long long));
-    in.read((char*)&walletId, sizeof(int));
-    in.read((char*)&categoryId, sizeof(int));
+    in.read((char*)&amount, sizeof(amount));
+    in.read((char*)&walletId, sizeof(walletId));
+    in.read((char*)&categoryId, sizeof(categoryId));
     size_t sz;
     in.read((char*)&sz, sizeof(sz));
     description.resize(sz);

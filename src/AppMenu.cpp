@@ -4,6 +4,7 @@
 using namespace std;
 
 AppMenu::AppMenu(){
+    system("cls");
     cout << "Initializing Financial Management Application...\n";
 }
 
@@ -161,6 +162,11 @@ void AppMenu::handleNetBalanceReport() {
     }
     Date startDate(startDay, startMonth, startYear);
 
+    if(!startDate.isValidDate()){
+        cout << "Invalid date format." << "\n";
+        return;
+    }
+
     cout << "Enter End Date (DD MM YYYY): ";
     if (!(cin >> endDay >> endMonth >> endYear)) {
         cout << "Invalid date format." << "\n";
@@ -168,7 +174,10 @@ void AppMenu::handleNetBalanceReport() {
         return;
     }
     Date endDate(endDay, endMonth, endYear);
-
+    if(!endDate.isValidDate()){
+        cout << "Invalid date format." << "\n";
+        return;
+    }
     if (startDate >= endDate && !(startDate == endDate) ) {
         cout << "Error: Start date must be before or equal to End date." << "\n";
         return;
