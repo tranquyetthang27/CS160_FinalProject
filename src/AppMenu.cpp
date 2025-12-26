@@ -64,13 +64,13 @@ void AppMenu::loadData(){
         nextSourceId = 1;
         nextWalletId = 1;
         for(int i = 0; i < ExpenseCategories.getSize(); i++){
-            nextCategogyId = max(nextCategogyId, ExpenseCategories[i].getId());
+            nextCategogyId = max(nextCategogyId, ExpenseCategories[i].getId()+1);
         }
         for(int i = 0; i < Wallets.getSize(); i++){
-            nextWalletId = max(nextWalletId, Wallets[i].getID());
+            nextWalletId = max(nextWalletId, Wallets[i].getID()+1);
         }
         for(int i = 0; i < IncomeSources.getSize(); i++){
-            nextSourceId = max(nextSourceId, IncomeSources[i].getID());
+            nextSourceId = max(nextSourceId, IncomeSources[i].getID()+1);
         }
         cout << "Data loaded successfully." << "\n";
     }
